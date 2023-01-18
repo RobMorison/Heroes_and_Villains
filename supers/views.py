@@ -9,4 +9,7 @@ from .models import Supers
 
 @api_view(['GET'])
 def supers_list(request):
-   return Response('ok')
+   if request.method == 'GET':
+        supers = Supers.objects.all()
+        serializer = SupersSerializer(supers, many=True)
+        return Response(serializer.data)
