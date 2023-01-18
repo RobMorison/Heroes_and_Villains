@@ -7,6 +7,6 @@ from .models import Supers
 
 # Create your views here.
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def supers_list(request):
-    pass
+   return Response('ok')
