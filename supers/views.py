@@ -20,9 +20,19 @@ def supers_list(request):
 
         if super_type:
             queryset = queryset.filter(super_types__type = super_type)
-
-        serializer = SupersSerializer(queryset, many=True)
-        return Response(serializer.data)
+            serializer = SupersSerializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            heroes = Supers.objects.filter(super_types__type = "Hero")
+            hero_serializer = SupersSerializer(heroes, many=True)
+            villains = Supers.objects.filter(super_types__type = "Villain")
+            villain_serializer = SupersSerializer(villains, many=True)
+            custom_response = {
+                "Heroes": hero_serializer.data,
+                "Villains": villain_serializer.data,
+            }
+            return Response(custom_response)
+            
 
 
 
